@@ -371,6 +371,31 @@ function downvote(item, username) {
   return item;
 }
 
+// Bonus: Yaml saving and loading
+const fs = require('fs');
+const yaml = require('js-yaml');
+const databaseName = 'database.yml';
+
+function loadDatabase() {
+  try {
+    const dbData = yaml.safeLoad(fs.readFileSync(databaseName, 'utf8'));
+    console.log('loaded: ' + dbData);
+    return dbData;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function saveDatabase() {
+  try {
+    const dbData = yaml.safeDump(database);
+    fs.writeFileSync(databaseName, dbData, 'utf8');
+    console.log('saved: ' + dbData);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 // Write all code above this line.
 
 const http = require('http');
